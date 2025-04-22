@@ -30,10 +30,10 @@ Threeno boards are designed to work naturally with:
 
 Threeno tries to fill a specific niche: a set of through-hole, hand-solderable boards with onboard radios that integrate smoothly into the JeeLib and OpenEnergyMonitor ecosystems. But depending on your needs, one of these other boards might be a better fit:
 
-- [**Moteino**](https://lowpowerlab.com/guide/moteino/) – Compact, preassembled, with a great set of shields and sketches. Part of an IoT ecosystem of its own, with a great user community and great support from Felix Russo.
-- [**JeeNode**](https://web.archive.org/web/20201130081805/https://jeelabs.org/docs/hardware/jnclassic/) – A classic by JCW, friendly for breadboard use and educational setups.
-- [**Azduino**](https://azduino.com) – Modern AVRs in small SMD packages from Spence Konde.
-- [**ESP32/ESP8266**](https://www.espressif.com/en/products/socs) – Excellent for Wi-Fi/Bluetooth, though less ideal for ultra-low power.
+- [**Moteino**](https://lowpowerlab.com/guide/moteino/) – The original Arduino + transceiver board. If you want an Arduino UNO-compatible board with a HopeRF transciever onboard, if you were not interested in soldering your own board, and if you didn't need the classic Arduino board-shape, you would clearly choose a Moteino over a Threeno. Compact, preassembled, with a great set of shields and sketches. Part of an IoT ecosystem of its own, with a great user community and great support from Felix Russo. You should probably just get a Moteino or two regardless. 
+- [**JeeNode**](https://web.archive.org/web/20201130081805/https://jeelabs.org/docs/hardware/jnclassic/) – A classic by JCW. [You can use the JeeNode USB as a RF-to-serial gateway.](https://community.openenergymonitor.org/t/receiving-jeelib-classic-and-lowpowerlab-in-parallel/22563) JCW has numerous plugin boards with various parts and sensors. It is a clever system that is different than Arduino sheilds, and makes a ton of sense. I have a classic JeeNode and love it.
+- [**Azduino**](https://azduino.com) – The latest and greatest AVR microcontrollers, on convenient breakout boards from Spence Konde, who is making the Arduino cores for them.
+- [**ESP32/ESP8266**](https://en.wikipedia.org/wiki/ESP32) – Excellent for Wi-Fi/Bluetooth, though less ideal for ultra-low power, which is one of the goals of the Low Power Lab, the JeeNode, and the OpenEnergyMonitor ecosystems.
 
 Each of these brings something different to the table—Threeno just aims to make it easier for people (especially soldering hobbyists) to experiment in this space with familiar tools and components.
 
