@@ -73,7 +73,11 @@ For ATmega328P-based boards, select “Arduino Uno” in the IDE.
 
 ## License
 
-All Threeno hardware and docs are released under the **CERN Open Hardware License v2 - Weakly Reciprocal (CERN-OHL-W)**. Please share improvements if you make them.
+This project is licensed under the GNU General Public License v3.0.
+
+You may copy, distribute, and modify this software under the terms of the GPLv3.
+
+See the full license at: https://www.gnu.org/licenses/gpl-3.0.en.html
 
 ---
 
