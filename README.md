@@ -21,7 +21,7 @@ Threeno boards are designed to work naturally with:
 
 - [**JeeLib**](https://github.com/jeelabs/jeelib) by Jean-Claude Wippler (JCW)
 - [**OpenEnergyMonitor**](https://openenergymonitor.org/) by Glyn Hudson, Trystan Lea, Robert Wall, and many others
-- [**LowPowerLab’s RFM69 Library**](https://github.com/LowPowerLab/RFM69) by Felix Russo
+- [**LowPowerLab’s low-power IoT project ecosystem**](https://lowpowerlab.com) by Felix Russo
 - [**Arduino IDE**](https://www.arduino.cc/en/software) with these board cores:
   - [**DxCore**](https://github.com/SpenceKonde/DxCore) – for AVR DB series
   - [**ATtinyCore**](https://github.com/SpenceKonde/ATTinyCore) – for ATtiny84
