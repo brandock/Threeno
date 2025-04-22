@@ -1,30 +1,82 @@
 # Threeno
 
-> **Hand‑solderable • UNO‑shield‑compatible footprints • 3 V 3 native • RFM69/95 onboard**  
-> A three‑board ecosystem that feels like classic Arduino, plays nicely with JeeLib,
-> OpenEnergyMonitor and LowPowerLabs, and never makes you hunt for a 0.4 mm stencil.
+**Threeno** is a family of through-hole, Arduino-compatible boards that came out of my own learning process as I dove deeper into low-power wireless sensor nodes. These boards were inspired by the amazing work of Jean-Claude Wippler (JeeLabs), Felix Russo (LowPowerLab), the OpenEnergyMonitor project, Nathan Chantrell’s TinyTx, and many others. Threeno is not meant to replace any of those designs—rather, it's a personal attempt to bring together what I’ve learned from them into a format that helped me prototype and understand more deeply. They’ve been useful to me as learning tools and prototypes—and maybe they can help others explore this ecosystem, too.
 
-| Board | MCU | Radio | Why you’d pick it |
-|-------|-----|-------|-------------------|
-| **Threeno Tx** | ATmega328P | RFM69CW | Moteino‑compatible 8‑bit workhorse |
-| **Threeno Tiny Tx** | ATtiny84 | RFM69CW | Ultra‑tiny sensor node (JeeNode/TinyTx spirit) |
-| **Threeno DB28 Tx** | AVR128DB28 | RFM69CW/RFM95 | Modern AVRx with MVIO tricks & 5 V / 3 V 3 split |
+I wanted a board I could use to explore this whole ecosystem—JeeLib, OpenEnergyMonitor, RFM69 radios, and the new AVR parts supported by Spence Konde's cores—but with a familiar Arduino Uno shield footprint. I didn’t want to rely on breadboards anymore. Too often, my breadboard connections were the reason things didn’t work. So Threeno took shape as a set of hand-solderable boards using plated-through-hole parts that anyone with a soldering iron could build and experiment with.
 
-## Philosophy
+## Objectives
 
-* **Hand solder first** – 0603 passives, SOIC or TQFP MCUs, 2‑54 mm headers.
-* **Uno muscle memory** – Shield footprint, D0‑D13/A0‑A5 exactly where you expect.
-* **Ecosystem glue** – Runs *unmodified* JeeLib, Felis’ RFM69, OEM sketches.
+These design goals shaped where and how pins are broken out on the boards:
 
-Jump straight to the boards:
+- **Familiarity**: Match the footprint of the Arduino Uno for compatibility with Uno shields and known layouts.
+- **Pin Position Parity**: Line up SPI, Serial, I²C, and other common peripherals with their usual locations on the Uno.
+- **Through-hole Focus**: Use PTH parts wherever possible to keep things accessible. (HopeRF radios are technically SMD, but easily hand-soldered.)
+- **Proven Components**: Include parts and patterns from designs by JeeLabs, Low Power Labs, OpenEnergyMonitor, and TinyTx—such as the MCP1702 regulator and the multi-transceiver RFM footprint.
+- **Stock Arduino Tooling**: Use standard Arduino board managers—no Threeno-specific tools required. ATmega328P boards use the built-in Uno target; AVR128DB28 and ATtiny84 boards use Spence Konde’s DxCore and ATTinyCore.
+- **Onboard Radios**: Including the HopeRF transceivers on the board makes prototyping wireless sensors a lot easier. These parts are somewhat notoriously difficult to breadboard, so having it soldered on in a proven way takes the guess work out of that part of your prototype. Other boards, such as Felix Russo's Moteino, also take this approach in compact and polished designs.
 
-* [`boards/ThreenoTx`](boards/ThreenoTx) – ATmega328P
-* [`boards/ThreenoTinyTx`](boards/ThreenoTinyTx) – ATtiny84
-* [`boards/ThreenoDB28Tx`](boards/ThreenoDB28Tx) – AVR128DB28
+## Ecosystem
 
-Need hardware?  See **docs/GettingBoardsAndParts.md**  
-Need extra gadgets?  Check **tools/**.
+Threeno boards are designed to work naturally with:
+
+- [**JeeLib**](https://github.com/jeelabs/jeelib) by Jean-Claude Wippler
+- [**OpenEnergyMonitor**](https://openenergymonitor.org/) by Glyn Hudson and Trystan Lea
+- [**LowPowerLab’s RFM69 Library**](https://github.com/LowPowerLab/RFM69) by Felix Russo
+- [**Arduino IDE**](https://www.arduino.cc/en/software) with these board cores:
+  - [**DxCore**](https://github.com/SpenceKonde/DxCore) – for AVR DB series
+  - [**ATtinyCore**](https://github.com/SpenceKonde/ATTinyCore) – for ATtiny84/85
+
+## Threeno Alternatives
+
+Threeno tries to fill a specific niche: a set of through-hole, hand-solderable boards with onboard radios that integrate smoothly into the JeeLib and OpenEnergyMonitor ecosystems. But depending on your needs, one of these other boards might be a better fit:
+
+- [**Moteino**](https://lowpowerlab.com/guide/moteino/) – Compact, preassembled, and great for production-ready nodes.
+- [**JeeNode**](https://jeelabs.org/tag/jeenode/) – A classic by JCW, friendly for breadboard use and educational setups.
+- [**TinyTx**](https://nathan.chantrell.net/projects/tinytx-wireless-sensor/) – Minimalist and built for long battery life.
+- [**Azduino**](https://github.com/SpenceKonde/azduino) – Modern AVRs in small SMD packages from Spence Konde.
+- [**ESP32/ESP8266**](https://www.espressif.com/en/products/socs) – Excellent for Wi-Fi/Bluetooth, though less ideal for ultra-low power.
+
+Each of these brings something different to the table—Threeno just aims to make it easier for people (especially soldering hobbyists) to experiment in this space with familiar tools and components.
+
+## Meet the Boards
+
+### [Threeno Tx (ATmega328P)](ThreenoTx.md)
+A classic 3.3V UNO-style board with onboard RFM69CW and FTDI or ISP programming.
+
+### [Threeno Tiny Tx (ATtiny84)](ThreenoTinyTx.md)
+Minimal and battery-friendly. Based on the ATtiny84, a nod to Nathan Chantrell’s TinyTx.
+
+### [Threeno DB28 Tx (AVR128DB28)](ThreenoDB28.md)
+A modern AVR with UPDI programming, MVIO, and Uno-compatible layout.
+
+## Getting the Boards
+
+- **Download Eagle files** and generate Gerbers
+- **Order from Seeed Fusion**
+- **Use the BOM** to order parts from DigiKey or Mouser
+
+Each board page includes soldering guides and full part lists.
+
+## Useful Tools
+
+- [**FlexyTx Shield**](https://lowpowerlab.com/shop/flexytx) – Mount and test RFM69CW radios easily
+- [**Evil Mad Scientist ISP Shield**](https://shop.evilmadscientist.com/productsmenu/652) – For burning bootloaders to raw AVRs
+
+## Developing with Threeno
+
+Use Spence Konde’s Arduino cores:
+
+- [DxCore](https://github.com/SpenceKonde/DxCore) – for AVR128DB28
+- [ATtinyCore](https://github.com/SpenceKonde/ATTinyCore) – for ATtiny84/85
+
+For ATmega328P-based boards, select “Arduino Uno” in the IDE.
+
+## License
+
+All Threeno hardware and docs are released under the **CERN Open Hardware License v2 - Weakly Reciprocal (CERN-OHL-W)**. Please share improvements if you make them.
 
 ---
 
-© 2025 <your name> • Licensed under CERN‑OHL‑S v2.
+This project is a thank you to the makers who built the boards I learned from.
+
+– Brandon Baldock
