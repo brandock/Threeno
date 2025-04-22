@@ -19,20 +19,19 @@ These design goals shaped where and how pins are broken out on the boards:
 
 Threeno boards are designed to work naturally with:
 
-- [**JeeLib**](https://github.com/jeelabs/jeelib) by Jean-Claude Wippler
-- [**OpenEnergyMonitor**](https://openenergymonitor.org/) by Glyn Hudson and Trystan Lea
+- [**JeeLib**](https://github.com/jeelabs/jeelib) by Jean-Claude Wippler (JCW)
+- [**OpenEnergyMonitor**](https://openenergymonitor.org/) by Glyn Hudson, Trystan Lea, Robert Wall, and many others
 - [**LowPowerLab’s RFM69 Library**](https://github.com/LowPowerLab/RFM69) by Felix Russo
 - [**Arduino IDE**](https://www.arduino.cc/en/software) with these board cores:
   - [**DxCore**](https://github.com/SpenceKonde/DxCore) – for AVR DB series
-  - [**ATtinyCore**](https://github.com/SpenceKonde/ATTinyCore) – for ATtiny84/85
+  - [**ATtinyCore**](https://github.com/SpenceKonde/ATTinyCore) – for ATtiny84
 
 ## Threeno Alternatives
 
 Threeno tries to fill a specific niche: a set of through-hole, hand-solderable boards with onboard radios that integrate smoothly into the JeeLib and OpenEnergyMonitor ecosystems. But depending on your needs, one of these other boards might be a better fit:
 
-- [**Moteino**](https://lowpowerlab.com/guide/moteino/) – Compact, preassembled, and great for production-ready nodes.
-- [**JeeNode**](https://jeelabs.org/tag/jeenode/) – A classic by JCW, friendly for breadboard use and educational setups.
-- [**TinyTx**](https://nathan.chantrell.net/projects/tinytx-wireless-sensor/) – Minimalist and built for long battery life.
+- [**Moteino**](https://lowpowerlab.com/guide/moteino/) – Compact, preassembled, with a great set of shields and sketches. Part of an IoT ecosystem of its own, with a great user community and great support from Felix Russo.
+- [**JeeNode**](https://web.archive.org/web/20201130081805/https://jeelabs.org/docs/hardware/jnclassic/) – A classic by JCW, friendly for breadboard use and educational setups.
 - [**Azduino**](https://github.com/SpenceKonde/azduino) – Modern AVRs in small SMD packages from Spence Konde.
 - [**ESP32/ESP8266**](https://www.espressif.com/en/products/socs) – Excellent for Wi-Fi/Bluetooth, though less ideal for ultra-low power.
 
