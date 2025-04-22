@@ -32,7 +32,7 @@ Threeno tries to fill a specific niche: a set of through-hole, hand-solderable b
 
 - [**Moteino**](https://lowpowerlab.com/guide/moteino/) – Compact, preassembled, with a great set of shields and sketches. Part of an IoT ecosystem of its own, with a great user community and great support from Felix Russo.
 - [**JeeNode**](https://web.archive.org/web/20201130081805/https://jeelabs.org/docs/hardware/jnclassic/) – A classic by JCW, friendly for breadboard use and educational setups.
-- [**Azduino**](https://github.com/SpenceKonde/azduino) – Modern AVRs in small SMD packages from Spence Konde.
+- [**Azduino**](https://azduino.com) – Modern AVRs in small SMD packages from Spence Konde.
 - [**ESP32/ESP8266**](https://www.espressif.com/en/products/socs) – Excellent for Wi-Fi/Bluetooth, though less ideal for ultra-low power.
 
 Each of these brings something different to the table—Threeno just aims to make it easier for people (especially soldering hobbyists) to experiment in this space with familiar tools and components.
