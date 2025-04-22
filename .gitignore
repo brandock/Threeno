@@ -1,0 +1,12 @@
+# Build artefacts
+*.hex
+*.elf
+*.bin
+# Eagle/KiCad junk
+*.b#*
+*.bk*
+*.tmp
+*.restore
+# OS cruft
+.DS_Store
+Thumbs.db
