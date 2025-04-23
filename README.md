@@ -1,6 +1,6 @@
 # Threeno
 
-**Threeno** is a family of through-hole, Arduino-compatible boards that came out of my own learning process as I dove deeper into low-power wireless sensor nodes. These boards were inspired by the amazing work of Jean-Claude Wippler (JeeLabs), Felix Russo (LowPowerLab), the OpenEnergyMonitor project, Nathan Chantrell’s TinyTx, and many others. Threeno is not meant to replace any of those designs—rather, it's a personal attempt to bring together what I’ve learned from them into a format that helped me prototype and understand more deeply. They’ve been useful to me as learning tools and prototypes—and maybe they can help others explore this ecosystem, too.
+**Threeno** is a family of through-hole, Arduino-compatible boards that came out of my own learning process as I dove deeper into low-power wireless sensor nodes. These boards were inspired by the amazing work of Jean-Claude Wippler (JeeLabs), Felix Rusu (LowPowerLab), the OpenEnergyMonitor project, Nathan Chantrell’s TinyTx, and many others. Threeno is not meant to replace any of those designs—rather, it's a personal attempt to bring together what I’ve learned from them into a format that helped me prototype and understand more deeply. They’ve been useful to me as learning tools and prototypes—and maybe they can help others explore this ecosystem, too.
 
 I wanted a board I could use to explore this whole ecosystem—JeeLib, OpenEnergyMonitor, RFM69 radios, and the new AVR parts supported by Spence Konde's cores—but with a familiar Arduino Uno shield footprint. I didn’t want to rely on breadboards anymore. Too often, my breadboard connections were the reason things didn’t work. So Threeno took shape as a set of hand-solderable boards using plated-through-hole parts that anyone with a soldering iron could build and experiment with.
 
@@ -13,7 +13,7 @@ These design goals shaped where and how pins are broken out on the boards:
 - **Through-hole Focus**: Use PTH parts wherever possible to keep things accessible. (HopeRF radios are technically SMD, but easily hand-soldered.)
 - **Proven Components**: Include parts and patterns from designs by JeeLabs, Low Power Labs, OpenEnergyMonitor, and TinyTx—such as the MCP1702 regulator and the multi-transceiver RFM footprint.
 - **Stock Arduino Tooling**: Use standard Arduino board managers—no Threeno-specific tools required. ATmega328P boards use the built-in Uno target; AVR128DB28 and ATtiny84 boards use Spence Konde’s DxCore and ATTinyCore.
-- **Onboard Radios**: Including the HopeRF transceivers on the board makes prototyping wireless sensors a lot easier. These parts are somewhat notoriously difficult to breadboard, so having it soldered on in a proven way takes the guess work out of that part of your prototype. Other boards, such as Felix Russo's Moteino, also take this approach in compact and polished designs.
+- **Onboard Radios**: Including the HopeRF transceivers on the board makes prototyping wireless sensors a lot easier. These parts are somewhat notoriously difficult to breadboard, so having it soldered on in a proven way takes the guess work out of that part of your prototype. Other boards, such as Felix Rusu's Moteino, also take this approach in compact and polished designs.
 
 ## Ecosystem
 
@@ -21,7 +21,7 @@ Threeno boards are designed to work naturally with:
 
 - [**JeeLib**](https://github.com/jeelabs/jeelib) by Jean-Claude Wippler (JCW)
 - [**OpenEnergyMonitor**](https://openenergymonitor.org/) by Glyn Hudson, Trystan Lea, Robert Wall, and many others
-- [**LowPowerLab’s low-power IoT project ecosystem**](https://lowpowerlab.com) by Felix Russo
+- [**LowPowerLab’s low-power IoT project ecosystem**](https://lowpowerlab.com) by Felix Rusu
 - [**Arduino IDE**](https://www.arduino.cc/en/software) with these board cores:
   - [**DxCore**](https://github.com/SpenceKonde/DxCore) – for AVR DB series
   - [**ATtinyCore**](https://github.com/SpenceKonde/ATTinyCore) – for ATtiny84
@@ -30,7 +30,7 @@ Threeno boards are designed to work naturally with:
 
 Threeno tries to fill a specific niche: a set of through-hole, hand-solderable boards with onboard radios that integrate smoothly into the JeeLib and OpenEnergyMonitor ecosystems. But depending on your needs, one of these other boards might be a better fit:
 
-- [**Moteino**](https://lowpowerlab.com/guide/moteino/) – The original Arduino + transceiver board. If you want an Arduino UNO-compatible board with a HopeRF transciever onboard, if you were not interested in soldering your own board, and if you didn't need the classic Arduino board-shape, you would clearly choose a Moteino over a Threeno. Compact, preassembled, with a great set of shields and sketches. Part of an IoT ecosystem of its own, with a great user community and great support from Felix Russo. You should probably just get a Moteino or two regardless. 
+- [**Moteino**](https://lowpowerlab.com/guide/moteino/) – The original Arduino + transceiver board. If you want an Arduino UNO-compatible board with a HopeRF transciever onboard, if you were not interested in soldering your own board, and if you didn't need the classic Arduino board-shape, you would clearly choose a Moteino over a Threeno. Compact, preassembled, with a great set of shields and sketches. Part of an IoT ecosystem of its own, with a great user community and great support from Felix Rusu. You should probably just get a Moteino or two regardless. 
 - [**JeeNode**](https://web.archive.org/web/20201130081805/https://jeelabs.org/docs/hardware/jnclassic/) – A classic by JCW. [You can use the JeeNode USB as a RF-to-serial gateway.](https://community.openenergymonitor.org/t/receiving-jeelib-classic-and-lowpowerlab-in-parallel/22563) JCW has numerous plugin boards with various parts and sensors. It is a clever system that is different than Arduino sheilds, and makes a ton of sense. I have a classic JeeNode and love it.
 - [**Azduino**](https://azduino.com) – The latest and greatest AVR microcontrollers, on convenient breakout boards from Spence Konde, who is making the Arduino cores for them.
 - [**ESP32/ESP8266**](https://en.wikipedia.org/wiki/ESP32) – Excellent for Wi-Fi/Bluetooth, though less ideal for ultra-low power, which is one of the goals of the Low Power Lab, the JeeNode, and the OpenEnergyMonitor ecosystems.
