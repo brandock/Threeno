@@ -14,6 +14,7 @@ These design goals shaped where and how pins are broken out on the boards:
 - **Proven Components**: Include parts and patterns from designs by JeeLabs, Low Power Labs, OpenEnergyMonitor, and TinyTx—such as the MCP1702 regulator and the multi-transceiver RFM footprint.
 - **Stock Arduino Tooling**: Use standard Arduino board managers—no Threeno-specific tools required. ATmega328P boards use the built-in Uno target; AVR128DB28 and ATtiny84 boards use Spence Konde’s DxCore and ATTinyCore.
 - **Onboard Radios**: Including the HopeRF transceivers on the board makes prototyping wireless sensors a lot easier. These parts are somewhat notoriously difficult to breadboard, so having it soldered on in a proven way takes the guess work out of that part of your prototype. Other boards, such as Felix Rusu's Moteino, also take this approach in compact and polished designs.
+- **Low Power**: Use the techniques used by Rusu, JCW, and OpenEnergyMonitor to make the boards run at very low power, with single-digit uA achievable in deep sleep mode.
 
 ## Ecosystem
 
