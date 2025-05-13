@@ -4,6 +4,9 @@
 
 I wanted a board I could use to explore this whole ecosystem—JeeLib, OpenEnergyMonitor, RFM69 radios, and the new AVR parts supported by Spence Konde's cores—but with a familiar Arduino Uno shield footprint. I didn’t want to rely on breadboards anymore. Too often, my breadboard connections were the reason things didn’t work. So Threeno took shape as a set of hand-solderable boards using plated-through-hole parts that anyone with a soldering iron could build and experiment with.
 
+
+
+
 ## Objectives
 
 These design goals shaped where and how pins are broken out on the boards:
@@ -43,12 +46,16 @@ Each of these brings something different to the table—Threeno just aims to mak
 
 ### [Threeno Tx (ATmega328P)](ThreenoTx.md)
 A classic 3.3V UNO-style board with onboard RFM69CW and FTDI or ISP programming.
+![IMG_4650](https://github.com/user-attachments/assets/5efc3db0-040c-46a9-8a2b-39a1b115fec0)
 
 ### [Threeno Tiny Tx (ATtiny84)](ThreenoTinyTx.md)
 Minimal and battery-friendly. Based on the ATtiny84, a nod to Nathan Chantrell’s TinyTx.
+![IMG_4582](https://github.com/user-attachments/assets/1089f688-e4bf-4f8a-a157-cb44c2b4629a)
 
 ### [Threeno DB28 Tx (AVR128DB28)](ThreenoDB28.md)
 A modern AVR with UPDI programming, MVIO, and Uno-compatible layout.
+![IMG_4648 (1)](https://github.com/user-attachments/assets/07b48851-f2ef-46e2-bd10-69b06ecd6ee2)
+
 
 ## Getting the Boards
 
