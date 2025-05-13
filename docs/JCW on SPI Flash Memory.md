@@ -91,12 +91,15 @@ Most µCs have hardware support for SPI. This allows them to perform very fast s
 
 In the LPC8xx, the maximum speed for the master is the same as the µC’s clock speed, i.e. 12 MHz on power up, and 30 MHz when the PLL has been set up appropriately. Once set up, sending out and reading back two bytes using the LPC’s SPI hardware is trivial:
 
+```c#
 uint16_t xfer16 (uint16_t out) {
   addr()->TXDATCTL = SPI_TXDATCTL_FLEN(16-1) | SPI_TXDATCTL_EOT | out;
   while ((addr()->STAT & SPI_STAT_RXRDY) == 0)
     ;
   return addr()->RXDAT;
 }
+```
+
 The LPC8xx hardware will set ENABLE to “0”, shift the data out and in using the CLOCK pin, and set ENABLE to “1” when done. At 12 MHz, this will all happen in less than 1.5 µS.
 
 In the above example, three transfers can be seen: send 0x05 (result 0x00), send 0x35 (result 0x00), and send 0x9F (result 0xEF). These all access status and info registers.
@@ -107,6 +110,7 @@ And since SPI flash is a common mechanism, it’s a good idea to allow re-use of
 
 With this code, we can now easily access our dataflash memory, using code such as:
 
+```c#
 #include "spi_flash.h"
 
 SpiFlash<SpiDev0> spif;
@@ -121,6 +125,7 @@ int main () {
   spif.read(...);
   ...
 }
+```
 
 The SpiFlash<SpiDev0> is a C++ template notation, saying: define an object of the SpiFlash class, _specialised_ to use the SpiDev0 class as its bus access mechanism. Where SpiDev0 is in turn shorthand for SpiDev<0>, i.e. use the SPI0 hardware interface, of the two present in the LPC812 we’re using.
 
