@@ -19,25 +19,26 @@ The end result is several megabytes of extra storage, using only 4 I/O pins. Dat
 Hooking up a dataflash chip
 Flash memory has taken over the world, covering an amazing range of memory needs:
 
-microcontrollers: kilobytes
-dataflash chips: megabytes
-USB- and (µ)SD cards: gigabytes
-SSDs in laptops and servers: terabytes
+- microcontrollers: _kilobytes_
+- dataflash chips: _megabytes_
+- USB- and (µ)SD cards: _gigabytes_
+- SSDs in laptops and servers: _terabytes_
+
 They all maintain their contents for many years and can be erased and re-written tens of thousands of times. Long gone are the days of core memory and battery backed-up RAM.
 
 Not only that, a tiny dataflash chip such as this one from Winbond costs less than €2:
 
 ![image](https://github.com/user-attachments/assets/d090e079-9024-43e3-9348-c1b34a0d013a)
 
-That gets you up to 16 megabytes of non-volatile storage, and the data is available faster than most most µCs can read them, with SPI clock rates up to 100 MHz. When connected in “Quad-SPI” mode, some µCs can in fact access 4 bits in parallel, giving a read-access rate of over 50 Mbyte per second. That’s random access: no rotational or seek delays in sight!
+That gets you up to 16 megabytes of non-volatile storage, and the data is available faster than most most µCs can read them, with SPI clock rates up to 100 MHz. When connected in “Quad-SPI” mode, some µCs can in fact access 4 bits in parallel, giving a read-access rate of over 50 _Mbyte_ per second. That’s _random_ access: no rotational or seek delays in sight!
 
 Writing is another matter. Usually, data can be written in units from 1 byte to one “page” (256 bytes, typically). Programming will normally take between 1 and 5 milliseconds – this is several orders of magnitude slowdown compared to the above sub-µs read timing.
 
-It gets worse: you can’t just write anything anywhere – you can only turn a “1” bit into a “0” bit when programming any part of memory. After that, flash memory needs to be erased before re-programming it further. An erase cycle resets part or all of memory to 1’s.
+It gets worse: you can’t just write anything anywhere – you can only turn a “1” bit into a “0” bit when programming any part of memory. After that, flash memory needs to be _erased_ before re-programming it further. An erase cycle resets part or all of memory to 1’s.
 
-The bad news? Erasure can only be done in sectors (or segments) of 4 Kb, usually (as well as a few larger units, all the way up to a full chip-erase).
+The bad news? Erasure can only be done in _sectors_ (or _segments_) of 4 Kb, usually (as well as a few larger units, all the way up to a full chip-erase).
 
-The really bad news? Erasing a segment can often take some 100 ms, with a full chip erase sometimes requiring several _minutes!_ – and after many erasures, these times will increase. During this time, the flash chip will be _busy_ (though there are ways to suspend/resume it).
+The _really bad_ news? Erasing a segment can often take some 100 ms, with a full chip erase sometimes requiring several _minutes!_ – and after many erasures, these times will increase. During this time, the flash chip will be _busy_ (though there are ways to suspend/resume it).
 
 The exact specs differ somewhat between chip families and manufacturers.
 
