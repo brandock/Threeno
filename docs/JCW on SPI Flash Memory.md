@@ -4,6 +4,7 @@ JCW wrote in his blog about SPI flash memory, and I found it instructive, so I r
 
 ## Dataflash via SPI ##
 _In Book on Apr 15, 2015 at 00:01_
+
 One of the things I’m going to need at some point is additional flash memory. Since the simplest way these days to add more memory is probably via SPI, that’s what I’ll use.
 
 This week’s episode is about connecting an SPI chip, implementing a simple driver, code re-use, the hidden dangers of solderless breadboards, and point-to-point soldering:
@@ -72,3 +73,61 @@ PIO0_2 and PIO0_3 are reserved for SWD hardware debugging on power-up, so the SW
 It’s probably good to point out here that most dataflash memory chips can only work with voltages up to 3.6V (and some not even that). _These chips may not be connected to 5V!_
 
 Next, we’ll need some code to handle the SPI communication and verify that it all works.
+
+## Accessing SPI memory ##
+SPI is easy to interface to. That’s because the signalling is quite simple:
+
+![image](https://github.com/user-attachments/assets/06bab1e1-9442-42f7-80f4-fb6ddc42f50c)
+
+There’s a _master_ side (in this case, the µC), which is in control of the ENABLE, CLOCK, and MOSI pins, and there’s a _slave_ side (the dataflash chip), which controls the MISO pin (but only when ENABLE is low).
+
+When ENABLE goes low, the master puts bits on the MOSI (“master out, slave in”) pin, and toggles the clock to shift each bit out to the slave. At the same time, it listens on the MISO pin (you guessed it: “master in, slave out”) and shifts the same number of bits in.
+
+Usually the master first needs to send one or more bytes, so it ignores what comes back during those initial clock cycles. Then, it sends out 0’s and toggles the clock pin further to read back what the slave puts on the MISO pin. When done, the ENABLE pin is set to “1” again. All very simple stuff, even in software.
+
+Unlike I2C, this is not a pure “bus”, in the sense that you can’t simply add more chips in parallel. Well, three of the pins _can_ and should be connected in parallel to all the slaves, but each slave will need a _separate_ ENABLE pin. In this example, there’s just one slave.
+
+Most µCs have hardware support for SPI. This allows them to perform very fast signalling, much faster than software would be able to toggle and read out pins.
+
+In the LPC8xx, the maximum speed for the master is the same as the µC’s clock speed, i.e. 12 MHz on power up, and 30 MHz when the PLL has been set up appropriately. Once set up, sending out and reading back two bytes using the LPC’s SPI hardware is trivial:
+
+uint16_t xfer16 (uint16_t out) {
+  addr()->TXDATCTL = SPI_TXDATCTL_FLEN(16-1) | SPI_TXDATCTL_EOT | out;
+  while ((addr()->STAT & SPI_STAT_RXRDY) == 0)
+    ;
+  return addr()->RXDAT;
+}
+The LPC8xx hardware will set ENABLE to “0”, shift the data out and in using the CLOCK pin, and set ENABLE to “1” when done. At 12 MHz, this will all happen in less than 1.5 µS.
+
+In the above example, three transfers can be seen: send 0x05 (result 0x00), send 0x35 (result 0x00), and send 0x9F (result 0xEF). These all access status and info registers.
+
+SPI is a very common interconnect mechanism, and is also used by the RFM12/RFM69 wireless modules. In fact, we already have a _generic_ SPI bus driver in the embello repository on GitHub. It was designed to be easily re-used for different tasks.
+
+And since SPI flash is a common mechanism, it’s a good idea to allow re-use of that code as well. Such an “SPI flash” driver can also be found on GitHub. Note that the SPI _bus_ driver is LPC8xx specific, but the SPI _flash_ driver built on top is not – it merely embodies the logic specific to the dataflash chip we’re using, _not_ how to talk to it for a particular µC.
+
+With this code, we can now easily access our dataflash memory, using code such as:
+
+#include "spi_flash.h"
+
+SpiFlash<SpiDev0> spif;
+
+int main () {
+  ...
+  spif.init();
+  printf("0x%x\n", spif.identify());
+  ....
+  spif.eraseSector(...);
+  spif.program(...);
+  spif.read(...);
+  ...
+}
+
+The SpiFlash<SpiDev0> is a C++ template notation, saying: define an object of the SpiFlash class, _specialised_ to use the SpiDev0 class as its bus access mechanism. Where SpiDev0 is in turn shorthand for SpiDev<0>, i.e. use the SPI0 hardware interface, of the two present in the LPC812 we’re using.
+
+A simple test application can be found here. It erases a few sectors, programs a few pages, and then reads back the data a few times.
+
+So, in _theory_, this stuff is trivial. We should expect this to work perfectly, right?
+
+_Yes and no_… the “Channel 0” pin in the image above is a dangling wire, which happened to be attached to the 8-bit logic analyser (a €10 unit from eBay). Surprisingly, it returns some pulses. This is worrying – we seem to be picking up _stray_ signals from nearby wires.
+
+_As you’ll see, there is some trouble ahead due to this and other unexpected side-effects._
